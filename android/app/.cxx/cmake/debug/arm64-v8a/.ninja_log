@@ -1,0 +1,5 @@
+# ninja log v5
+0	52	1634990292	CMakeFiles/simple.dir/Users/Aleksandr_Denisov/Work/workshops/integrations/src/simple.c.o	98249c04d7123b89
+52	99	1634990292	/Users/Aleksandr_Denisov/Work/workshops/integrations/build/app/intermediates/cmake/debug/obj/arm64-v8a/libsimple.so	b2a59598b090fee8
+0	48	1634990703	CMakeFiles/simple.dir/Users/Aleksandr_Denisov/Work/workshops/integrations/src/simple.c.o	98249c04d7123b89
+48	102	1634990703	/Users/Aleksandr_Denisov/Work/workshops/integrations/build/app/intermediates/cmake/debug/obj/arm64-v8a/libsimple.so	b2a59598b090fee8

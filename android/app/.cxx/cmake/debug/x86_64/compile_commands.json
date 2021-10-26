@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/Aleksandr_Denisov/Work/workshops/integrations/android/app/.cxx/cmake/debug/x86_64",
+  "command": "/Users/Aleksandr_Denisov/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=x86_64-none-linux-android21 --gcc-toolchain=/Users/Aleksandr_Denisov/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/Aleksandr_Denisov/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dsimple_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/simple.dir/Users/Aleksandr_Denisov/Work/workshops/integrations/src/simple.c.o   -c /Users/Aleksandr_Denisov/Work/workshops/integrations/src/simple.c",
+  "file": "/Users/Aleksandr_Denisov/Work/workshops/integrations/src/simple.c"
+}
+]
