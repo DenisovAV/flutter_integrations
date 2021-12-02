@@ -14,7 +14,7 @@
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		D30B11A0272407070012E158 /* FLPlatformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B119F272407070012E158 /* FLPlatformView.swift */; };
-		D3F540C82724516E009A1708 /* simple.c in Sources */ = {isa = PBXBuildFile; fileRef = D3F540C72724516E009A1708 /* simple.c */; };
+		D3E247E12759726A00F67364 /* random.c in Sources */ = {isa = PBXBuildFile; fileRef = D3E247E02759726A00F67364 /* random.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,7 +45,7 @@
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D30B119F272407070012E158 /* FLPlatformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLPlatformView.swift; sourceTree = "<group>"; };
-		D3F540C72724516E009A1708 /* simple.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = simple.c; sourceTree = "<group>"; };
+		D3E247E02759726A00F67364 /* random.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = random.c; path = ../src/random.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +73,7 @@
 		97C146E51CF9000F007C117D = {
 			isa = PBXGroup;
 			children = (
-				D3F540C72724516E009A1708 /* simple.c */,
+				D3E247E02759726A00F67364 /* random.c */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				97C146EF1CF9000F007C117D /* Products */,
@@ -210,9 +210,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3F540C82724516E009A1708 /* simple.c in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				D30B11A0272407070012E158 /* FLPlatformView.swift in Sources */,
+				D3E247E12759726A00F67364 /* random.c in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

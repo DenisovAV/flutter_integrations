@@ -1,10 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:integrations/platform_view.dart';
-
-import 'ffi_bridge.dart';
+import 'package:flutter_integrations/platform/service.dart';
+import 'package:flutter_integrations/platform/dummy/platform_view_dummy.dart'
+    if (dart.library.html) 'package:flutter_integrations/platform/web/platform_view_web.dart'
+    if (dart.library.io) 'package:flutter_integrations/platform/mobile/platform_view_mobile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,15 +37,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _platformValue = 0;
+  bool _hybridComposition = false;
   StreamSubscription? _subscription;
-  static const platform = MethodChannel('integrations.gdg.dev/channel');
-  static const stream = EventChannel('integrations.gdg.dev/events');
-
-  final FFIBridge _ffiBridge = FFIBridge();
+  final service = getService();
 
   @override
   Widget build(BuildContext context) {
+    final style = Theme.of(context).textTheme.headline6;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -53,15 +53,36 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text(
+              'UI component from platform:',
+              style: style,
+            ),
             Center(
-              child: SizedBox(
-                child: PlatformWidget(),
-                height: 50,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: PlatformWidget(
+                  hybridComposition: _hybridComposition,
+                ),
               ),
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              'Stream from platform:',
+              style: style,
+            ),
+            StreamBuilder<int>(
+              stream: service.getStream(),
+              builder: (context, snapshot) => Text(
+                '${snapshot.hasData ? snapshot.data : 'No data'}',
+                style: style,
+              ),
+            ),
+            Text(
+              'Value from platform:',
+              style: style,
+            ),
+            Text(
+              '$_platformValue',
+              style: style,
             ),
           ],
         ),
@@ -69,54 +90,32 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
         FloatingActionButton(
           child: const Icon(Icons.get_app),
-          onPressed: _getCValue,
+          onPressed: _getValue,
           heroTag: null,
         ),
         const SizedBox(
           height: 10,
         ),
         FloatingActionButton(
-          child: const Icon(Icons.call_received),
-          onPressed: _subscribe,
+          child: const Icon(Icons.replay),
+          onPressed: _changeComposition,
+          heroTag: null,
         ),
-        const SizedBox(
-          height: 10,
-        ),
-        FloatingActionButton(
-          child: const Icon(Icons.send),
-          onPressed: _send,
-        )
       ]), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
-  Future<void> _send() async {
-    try {
-      await platform.invokeMethod('ping', 'Text from Flutter');
-    } on PlatformException catch (e) {
-      print("Failed to ping: '${e.message}'.");
-    }
+  void _changeComposition() {
+    setState(() {
+      _hybridComposition = !_hybridComposition;
+    });
   }
 
-  Future<void> _getCValue() async {
-    try {
-      setState(() {
-        _counter = _ffiBridge.getCValue();
-      });
-    } on PlatformException catch (e) {
-      print("Failed to ping: '${e.message}'.");
-    }
-  }
-
-  Future<void> _subscribe() async {
-    _subscription?.cancel();
-    try {
-      _subscription = stream.receiveBroadcastStream().listen((event) => setState(() {
-            _counter = event;
-          }));
-    } on PlatformException catch (e) {
-      print("Failed to ping: '${e.message}'.");
-    }
+  void _getValue() {
+    final value = service.getValue();
+    setState(() {
+      _platformValue = value;
+    });
   }
 
   @override

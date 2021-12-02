@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.4.1)
 
 add_library(
-            simple
+            random
             SHARED
-            ../../src/simple.c
+            ../../src/random.c
 )

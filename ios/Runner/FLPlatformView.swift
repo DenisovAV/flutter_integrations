@@ -22,8 +22,9 @@ class FLPlatformViewFactory: NSObject, FlutterPlatformViewFactory {
     }
 }
 
-class FLPlatformView: NSObject, FlutterPlatformView {
+class FLPlatformView: NSObject, FlutterPlatformView, FlutterStreamHandler  {
     private var _view: UIView
+    private var _eventSink: FlutterEventSink!
 
     init(
         frame: CGRect,
@@ -39,26 +40,43 @@ class FLPlatformView: NSObject, FlutterPlatformView {
     func view() -> UIView {
         return _view
     }
+    
+    @objc
+    func onClick(sender: UIButton!) {
+        self._eventSink(Int.random(in: 0..<500))
+    }
+    
+    func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
+        _eventSink = events
+        return nil
+    }
+    
+    func onCancel(withArguments arguments: Any?) -> FlutterError? {
+        _eventSink = nil
+        return nil
+    }
 
     func createNativeView(view _view: UIView, binaryMessenger messenger: FlutterBinaryMessenger){
-        _view.backgroundColor = UIColor.blue
-        let nativeLabel = UILabel()
-        nativeLabel.text = "Native text from iOS"
-        nativeLabel.textColor = UIColor.white
-        nativeLabel.textAlignment = .center
-        nativeLabel.frame = CGRect(x: 0, y: 0, width: 180, height: 48.0)
-        _view.addSubview(nativeLabel)
+        let button = UIButton()
+        button.setTitle("iOS Native Button", for: .normal)
+        button.addTarget(self, action: #selector(onClick(sender:)), for: .touchUpInside)
+        button.backgroundColor = UIColor.blue
+        button.frame = CGRect(x: 0, y: 0, width: 180, height: 48.0)
+        _view.addSubview(button)
         
-        let channel = FlutterMethodChannel(name: "integrations.gdg.dev/channel", binaryMessenger: messenger)
+        let channel = FlutterMethodChannel(name: "CALL_METHOD", binaryMessenger: messenger)
+        let eventChannel = FlutterEventChannel(name: "CALL_EVENTS",                                                   binaryMessenger: messenger)
+        
+        eventChannel.setStreamHandler(self)
         
         channel.setMethodCallHandler({
           (call: FlutterMethodCall, result: FlutterResult) -> Void in
-          guard call.method == "ping" else {
+          guard call.method == "CALL" else {
             result(FlutterMethodNotImplemented)
             return
           }
-          nativeLabel.text = call.arguments != nil ? "\(call.arguments!)" : ""
-          result(nil)
+          result(Int.random(in: 0..<500))
         })
     }
 }
+
