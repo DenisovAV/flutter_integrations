@@ -1,6 +1,7 @@
 # flutter_integrations
 The repository with sample of all possible Flutter integrations with platform
 this is a fork of https://github.com/DenisovAV/flutter_integrations
+use with care
 
 # integrations
 
