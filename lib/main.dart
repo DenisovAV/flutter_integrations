@@ -89,18 +89,17 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
         FloatingActionButton(
-          child: const Icon(Icons.get_app),
           onPressed: _getValue,
-          heroTag: null,
+          child: const Icon(Icons.get_app),
         ),
         const SizedBox(
           height: 10,
         ),
-        FloatingActionButton(
-          child: const Icon(Icons.replay),
-          onPressed: _changeComposition,
-          heroTag: null,
-        ),
+        if (defaultTargetPlatform == TargetPlatform.android)
+          FloatingActionButton(
+            onPressed: _changeComposition,
+            child: const Icon(Icons.replay),
+          ),
       ]), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

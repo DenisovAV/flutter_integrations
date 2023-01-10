@@ -1,10 +1,6 @@
 # flutter_integrations
 The repository with sample of all possible Flutter integrations with platform
 
-# integrations
-
-A new Flutter project.
-
 ## Getting Started
 
 This project is a starting point for a Flutter application.

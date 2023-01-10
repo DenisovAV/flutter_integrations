@@ -4,7 +4,7 @@ class PlatformWidget extends StatelessWidget {
 
   final bool hybridComposition;
 
-  const PlatformWidget({required this.hybridComposition});
+  const PlatformWidget({Key? key, required this.hybridComposition}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

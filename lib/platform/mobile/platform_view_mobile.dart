@@ -7,14 +7,14 @@ import 'package:flutter/services.dart';
 class PlatformWidget extends StatelessWidget {
   final bool hybridComposition;
 
-  const PlatformWidget({required this.hybridComposition});
+  const PlatformWidget({Key? key, required this.hybridComposition}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     late final Widget view;
     if (defaultTargetPlatform == TargetPlatform.android) {
       if (hybridComposition) {
-        final String viewType = 'INTEGRATION_ANDROID';
+        const viewType = 'INTEGRATION_ANDROID';
         final Map<String, dynamic> creationParams = <String, dynamic>{};
 
         view = PlatformViewLink(
@@ -59,6 +59,8 @@ class PlatformWidget extends StatelessWidget {
   }
 
   void _onPlatformViewCreated(int id) {
-    print('PlaformView with id:$id created');
+    if (kDebugMode) {
+      print('PlatformView with id:$id created');
+    }
   }
 }
